@@ -8,7 +8,7 @@ import FoodBox from './components/FoodBox'
 function App() {
   return (
     <div className="App">
-      <FoodBox food={foods[0]} />
+      { foods.map( item => <FoodBox food={item} /> ) }
     </div>
   );
 }
