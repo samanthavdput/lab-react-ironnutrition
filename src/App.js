@@ -1,14 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import 'bulma/css/bulma.css';
 import foods from './foods.json';
 import FoodBox from "./components/FoodBox.js"
 
 function App() {
+
+  const foodList = foods.map( element => {
+    return <FoodBox key={element.name} food={element} />
+  })
+
   return (
     <div className="App">
-      <FoodBox food={foods[0]}/>
+      { foodList }
     </div>
   );
 }
