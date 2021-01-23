@@ -4,8 +4,8 @@ import React, { Component } from 'react'
 
     constructor(props){
         super(props);
-
         this.state = {
+            showForm: false,
             name: '',
             calories: 0,
             image: ''
@@ -13,9 +13,7 @@ import React, { Component } from 'react'
     }
 
     handleChange = (event) => {
-
         const propertyName = event.target.name
-
         this.setState({
             [propertyName]: event.target.value
         })
@@ -23,14 +21,36 @@ import React, { Component } from 'react'
 
     handleFormSubmission = (event) => {
         event.preventDefault()
-        this.props.addFood(this.state)
-        console.log('hi')
+        this.props.addFood({
+            name: this.state.name,
+            calories: this.state.calories,
+            image: this.state.image,
+        })
+        this.setState({
+            showForm: false,
+            name: '',
+            calories: 0,
+            image: ''
+        });
+    }
+
+    displayForm = () => {
+        const newShowForm = ! this.state.showForm;
+        this.setState({
+            showForm: newShowForm
+        });
     }
 
     render() {
+        const formStyle = {
+            display: this.state.showForm ? "block" : "none"
+        }
         return (
             <div>
-                <form onSubmit={this.handleFormSubmission}>
+                <button onClick={this.displayForm}>
+                    { this.state.showForm ? "Hide form" : "Display form" }
+                </button>
+                <form onSubmit={this.handleFormSubmission} style={formStyle}>
                     <label>Name:</label>
                         <input type='text' name='name' value={this.state.name} onChange={this.handleChange} ></input>
 
