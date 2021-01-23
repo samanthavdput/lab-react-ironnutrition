@@ -5,20 +5,30 @@ import foods from './foods.json';
 import FoodBox from './components/FoodBox'
 import AddFood from './components/AddFood'
 
-function App() {
+class App extends React.Component {
+  state = {
+    foods
+  }
 
-  const foodList = foods.map(element => {
-    return <FoodBox key={element.name} food={element} />
-    
-  })
+  handleAddFood = (newFood) => {
+    const newFoods = [newFood, ...this.state.foods]
+    console.log('help')
+    this.setState({foods: newFoods})
+  }
 
-  return (
-    <div className="App">
-      <h1>test</h1>
-      <AddFood />
-      {foodList}
-    </div>
-  );
+  render() {
+    const foodList = this.state.foods.map(element => {
+      return <FoodBox key={element.name} food={element} />
+
+    })
+    return (
+      <div className="App">
+        <h1>test</h1>
+        <AddFood addFood={this.handleAddFood} />
+        {foodList}
+      </div>
+    );
+  }
 }
 
 export default App;

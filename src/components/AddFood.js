@@ -21,10 +21,16 @@ import React, { Component } from 'react'
         })
     }
 
+    handleFormSubmission = (event) => {
+        event.preventDefault()
+        this.props.addFood(this.state)
+        console.log('hi')
+    }
+
     render() {
         return (
             <div>
-                <form>
+                <form onSubmit={this.handleFormSubmission}>
                     <label>Name:</label>
                         <input type='text' name='name' value={this.state.name} onChange={this.handleChange} ></input>
 
